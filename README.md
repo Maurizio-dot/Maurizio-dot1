@@ -85,6 +85,7 @@ ORDER BY ?date
 We made further modifications to the initial query:
 1. Modified `SELECT ?author ?label ?date` to `SELECT DISTINCT ?paintings ?label` to eliminate duplicates and include all paintings with the date, if present;
 2. Removed `ORDER BY ?date` as it was irrelevant in this context, and added `LIMIT 20` to narrow down the results.
+
 ```
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -99,9 +100,11 @@ FILTER(REGEX(?label,  "Andrea del Sarto", "i"))
 }
 LIMIT 20
 ```
+
 [Results](https://dati.cultura.gov.it/sparql?default-graph-uri=&query=PREFIX+rdf%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E%0D%0APREFIX+rdfs%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0D%0APREFIX+arco%3A+%3Chttps%3A%2F%2Fw3id.org%2Farco%2Fontology%2Farco%2F%3E%0D%0APREFIX+dcterms%3A+%3Chttp%3A%2F%2Fpurl.org%2Fdc%2Fterms%2F%3E%0D%0A%0D%0ASELECT+DISTINCT+%3Fpaintings+%3Flabel%0D%0A+WHERE+%7B%0D%0A%3Fpaintings+rdfs%3Alabel+%3Flabel%0D%0AOPTIONAL+%7B+%3Fauthor+dcterms%3Adate+%3Fdate+%7D+.%0D%0AFILTER%28REGEX%28%3Flabel%2C++%22Andrea+del+Sarto%22%2C+%22i%22%29%29%0D%0A%7D%0D%0ALIMIT+20%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A&format=text%2Fhtml&timeout=0&signal_void=on).
 
 As a data verification we added to the previous query the `UNION` keyword to merge results from two patterns, one related to works by "Andrea del Sarto" and another related to works with "Cenacolo" in their labels:
+
 ```
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -123,6 +126,7 @@ WHERE {
 }
 LIMIT 20
 ```
+
 [Results](https://dati.cultura.gov.it/sparql?default-graph-uri=&query=PREFIX+rdf%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E%0D%0APREFIX+rdfs%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0D%0APREFIX+arco%3A+%3Chttps%3A%2F%2Fw3id.org%2Farco%2Fontology%2Farco%2F%3E%0D%0APREFIX+dcterms%3A+%3Chttp%3A%2F%2Fpurl.org%2Fdc%2Fterms%2F%3E%0D%0A%0D%0ASELECT+DISTINCT+%3Fitem+%3Flabel+%3Fdate%0D%0AWHERE+%7B%0D%0A++%7B%0D%0A%09%3Fitem+rdfs%3Alabel+%3Flabel+.%0D%0A%09%3Fitem+dcterms%3Acreator+%3Fauthor+.%0D%0A%09%3Fauthor+rdfs%3Alabel+%3FauthorLabel+.%0D%0A%09FILTER%28REGEX%28%3FauthorLabel%2C+%22Andrea+del+Sarto%22%2C+%22i%22%29%29+.%0D%0A%09OPTIONAL+%7B+%3Fitem+dcterms%3Adate+%3Fdate+%7D+.%0D%0A++%7D+UNION+%7B%0D%0A%09%3Fitem+rdfs%3Alabel+%3Flabel+.%0D%0A%09FILTER%28REGEX%28%3Flabel%2C+%22Cenacolo%22%2C+%22i%22%29%29+.%0D%0A++%7D%0D%0A%7D%0D%0ALIMIT+20%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A&format=text%2Fhtml&timeout=0&signal_void=on).
 
 From this list, we identified one painting that did not already have a significant amount of information associated with it: [click here to visualise it](https://dati.beniculturali.it/lodview/mibact/eventi/resource/CreativeWork/13596_.html). This property will serve as the starting point for the second phase of our project.
