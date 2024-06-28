@@ -83,10 +83,25 @@ WHERE {
 ORDER BY ?date
 ```
 We made further modifications to the initial query:
-1. Modified `SELECT ?author ?label ?date` to `SELECT DISTINCT ?item ?label` to eliminate duplicates and include all paintings with the date, if present;
-2. `UNION` to merge results from two patterns: one related to works by "Andrea del Sarto" and another related to works with "Cenacolo" in their labels;
-3. Removed `ORDER BY ?date` as it was irrelevant in this context, and added `LIMIT 20` to narrow down the results.
+1. Modified `SELECT ?author ?label ?date` to `SELECT DISTINCT ?paintings ?label` to eliminate duplicates and include all paintings with the date, if present;
+2. Removed `ORDER BY ?date` as it was irrelevant in this context, and added `LIMIT 20` to narrow down the results.
+```
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX arco: <https://w3id.org/arco/ontology/arco/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
 
+SELECT DISTINCT ?paintings ?label
+ WHERE {
+?paintings rdfs:label ?label
+OPTIONAL { ?author dcterms:date ?date } .
+FILTER(REGEX(?label,  "Andrea del Sarto", "i"))
+}
+LIMIT 20
+```
+[Results](https://dati.cultura.gov.it/sparql?default-graph-uri=&query=PREFIX+rdf%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E%0D%0APREFIX+rdfs%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0D%0APREFIX+arco%3A+%3Chttps%3A%2F%2Fw3id.org%2Farco%2Fontology%2Farco%2F%3E%0D%0APREFIX+dcterms%3A+%3Chttp%3A%2F%2Fpurl.org%2Fdc%2Fterms%2F%3E%0D%0A%0D%0ASELECT+DISTINCT+%3Fpaintings+%3Flabel%0D%0A+WHERE+%7B%0D%0A%3Fpaintings+rdfs%3Alabel+%3Flabel%0D%0AOPTIONAL+%7B+%3Fauthor+dcterms%3Adate+%3Fdate+%7D+.%0D%0AFILTER%28REGEX%28%3Flabel%2C++%22Andrea+del+Sarto%22%2C+%22i%22%29%29%0D%0A%7D%0D%0ALIMIT+20%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A&format=text%2Fhtml&timeout=0&signal_void=on).
+
+As a data verification we added to the previous query the `UNION` keyword to merge results from two patterns, one related to works by "Andrea del Sarto" and another related to works with "Cenacolo" in their labels:
 ```
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -107,7 +122,6 @@ WHERE {
   }
 }
 LIMIT 20
-
 ```
 [Results](https://dati.cultura.gov.it/sparql?default-graph-uri=&query=PREFIX+rdf%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E%0D%0APREFIX+rdfs%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0D%0APREFIX+arco%3A+%3Chttps%3A%2F%2Fw3id.org%2Farco%2Fontology%2Farco%2F%3E%0D%0APREFIX+dcterms%3A+%3Chttp%3A%2F%2Fpurl.org%2Fdc%2Fterms%2F%3E%0D%0A%0D%0ASELECT+DISTINCT+%3Fitem+%3Flabel+%3Fdate%0D%0AWHERE+%7B%0D%0A++%7B%0D%0A%09%3Fitem+rdfs%3Alabel+%3Flabel+.%0D%0A%09%3Fitem+dcterms%3Acreator+%3Fauthor+.%0D%0A%09%3Fauthor+rdfs%3Alabel+%3FauthorLabel+.%0D%0A%09FILTER%28REGEX%28%3FauthorLabel%2C+%22Andrea+del+Sarto%22%2C+%22i%22%29%29+.%0D%0A%09OPTIONAL+%7B+%3Fitem+dcterms%3Adate+%3Fdate+%7D+.%0D%0A++%7D+UNION+%7B%0D%0A%09%3Fitem+rdfs%3Alabel+%3Flabel+.%0D%0A%09FILTER%28REGEX%28%3Flabel%2C+%22Cenacolo%22%2C+%22i%22%29%29+.%0D%0A++%7D%0D%0A%7D%0D%0ALIMIT+20%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A&format=text%2Fhtml&timeout=0&signal_void=on).
 
@@ -239,36 +253,36 @@ The third and final phase of the project involves creating triples to link to th
 
 #### Triple 1
 ***A-cd:hasAuthor***
-+ **Subject**: [https://dati.beniculturali.it/lodview/mibact/eventi/resource/CreativeWork/13596_.html](https://dati.beniculturali.it/lodview/mibact/eventi/resource/CreativeWork/13596_.html)  
++ [**Subject**](https://dati.beniculturali.it/lodview/mibact/eventi/resource/CreativeWork/13596_.html)
 + **Predicate**: hasAuthor
 + **Object (Andrea del Sarto)**: [https://w3id.org/arco/resource/Agent/11c57796fc5920fdba4b92fd459c0200](https://w3id.org/arco/resource/Agent/11c57796fc5920fdba4b92fd459c0200)
 
 #### Triple 2
 ***A-cd:hasSubject***
-+ **Subject**: [https://dati.beniculturali.it/lodview/mibact/eventi/resource/CreativeWork/13596_.html](https://dati.beniculturali.it/lodview/mibact/eventi/resource/CreativeWork/13596_.html)
++ [**Subject**](https://dati.beniculturali.it/lodview/mibact/eventi/resource/CreativeWork/13596_.html)
 + **Predicate**: hasSubject [https://w3id.org/arco/ontology/context-description/hasSubject](https://w3id.org/arco/ontology/context-description/hasSubject)
 + **Object (Ultima Cena)**: [https://w3id.org/arco/resource/Subject/fff38876918a8a316e826d2ccc81f537](https://w3id.org/arco/resource/Subject/fff38876918a8a316e826d2ccc81f537)
 
 #### Triple 3
 ***A-cd:hasTitle***
-+ **Subject**: [https://dati.beniculturali.it/lodview/mibact/eventi/resource/CreativeWork/13596_.html](https://dati.beniculturali.it/lodview/mibact/eventi/resource/CreativeWork/13596_.html) 
++ [**Subject**](https://dati.beniculturali.it/lodview/mibact/eventi/resource/CreativeWork/13596_.html)
 + **Predicate**: a-cd:hasTitle [https://w3id.org/arco/ontology/context-description/Title](https://w3id.org/arco/ontology/context-description/Title) 
 + **Object (Il Cenacolo)**: [https://w3id.org/arco/resource/Title/0300179928-il-cenacolo](https://w3id.org/arco/resource/Title/0300179928-il-cenacolo)
 
 #### Triple 4
 ***A-loc:hasCulturalPropertyAddress***
-+ **Subject**: [https://dati.beniculturali.it/lodview/mibact/eventi/resource/CreativeWork/13596_.html](https://dati.beniculturali.it/lodview/mibact/eventi/resource/CreativeWork/13596_.html)
++ [**Subject**](https://dati.beniculturali.it/lodview/mibact/eventi/resource/CreativeWork/13596_.html)
 + **Predicate**: a-loc:hasCulturalPropertyAddress ([a-loc:hasCulturalPropertyAddress](a-loc:hasCulturalPropertyAddress))
 + **Object (Toscana, FI, Firenze)**: [https://dati.beniculturali.it/lodview-arco/resource/Address/4287e9f9192e011971297d4609f2f41c.html](https://dati.beniculturali.it/lodview-arco/resource/Address/4287e9f9192e011971297d4609f2f41c.html) 
 
 #### Triple 5
 ***A-loc:hasCulturalInstituteOrSite***
-+ **Subject**: [https://dati.beniculturali.it/lodview/mibact/eventi/resource/CreativeWork/13596_.html](https://dati.beniculturali.it/lodview/mibact/eventi/resource/CreativeWork/13596_.html)
++ [**Subject**](https://dati.beniculturali.it/lodview/mibact/eventi/resource/CreativeWork/13596_.html)
 + **Predicate**: a-loc:hasCulturalInstituteOrSite ([https://w3id.org/arco/ontology/location/hasCulturalInstituteOrSite](https://w3id.org/arco/ontology/location/hasCulturalInstituteOrSite)) 
 + **Object (Museo del Cenacolo di Andrea del Sarto)**: [https://w3id.org/arco/resource/CulturalInstituteOrSite/610717aa4ebd312c305eb06dcc4d740a](https://w3id.org/arco/resource/CulturalInstituteOrSite/610717aa4ebd312c305eb06dcc4d740a)
 
 #### Triple 6
 ***A-dd:hasMaterialorTechnique***
-+ **Subject**: [https://dati.beniculturali.it/lodview/mibact/eventi/resource/CreativeWork/13596_.html](https://dati.beniculturali.it/lodview/mibact/eventi/resource/CreativeWork/13596_.html) 
++ [**Subject**](https://dati.beniculturali.it/lodview/mibact/eventi/resource/CreativeWork/13596_.html)
 + **Predicate**: a-dd:hasMaterialorTechnique ([https://w3id.org/arco/ontology/denotative-description/MaterialOrTechnique](https://w3id.org/arco/ontology/denotative-description/MaterialOrTechnique))
 + **Object (intonaco / pittura a fresco)**: [https://w3id.org/arco/resource/TechnicalCharacteristic/intonaco-pittura-a-fresco](https://w3id.org/arco/resource/TechnicalCharacteristic/intonaco-pittura-a-fresco) 
