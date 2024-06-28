@@ -206,7 +206,7 @@ FILTER(?label = "Museo del Cenacolo di Andrea del Sarto")
 ```
 [Results](https://dati.cultura.gov.it/sparql?default-graph-uri=&query=PREFIX+rdf%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E++++%0D%0APREFIX+rdfs%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E++++%0D%0APREFIX+arco%3A+%3Chttps%3A%2F%2Fw3id.org%2Farco%2Fontology%2Farco%2F%3E++++%0D%0A+SELECT+DISTINCT+++++%0D%0A%3FhasCulturalInstituteOrSite+%3Flabel+++++%0D%0AWHERE+%7B+++++%0D%0A%3FhasCulturalInstituteOrSite+rdfs%3Alabel+%3Flabel+++++%0D%0AFILTER%28%3Flabel+%3D+%22Museo+del+Cenacolo+di+Andrea+del+Sarto%22%29++++%0D%0A%7D++%0D%0A&format=text%2Fhtml&timeout=0&signal_void=on.).
 
-Only for "affresco" we were unable to identify its corresponding property ("Type of Artwork"). Therefore, we directly asked ChatGPT to provide us with the correct property using the Few-Shot CoT Prompting technique:
+Only for "affresco" we were unable to identify its corresponding property ("Type of Artwork"). Therefore, we directly asked ChatGPT to provide us with the correct property using the Few-Shot Prompting technique:
 
 <img width="482" alt="lol" src="https://github.com/Maurizio-dot/Maurizio-dot.github.io/assets/173699843/32cc0882-c82d-4c82-931a-142704bfef93">
 
