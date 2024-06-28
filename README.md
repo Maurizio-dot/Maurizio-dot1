@@ -1,3 +1,11 @@
+# ITS project
+
+___
+
+[Methodology](https://maurizio-dot.github.io/Maurizio-dot/) [Project phases](https://maurizio-dot.github.io/Maurizio-dot1/) [Conclusion](https://maurizio-dot.github.io/Maurizio-dot2/) 
+
+___
+
 ## Project phases
 ### 1. Topic identification 
 In the initial phase of our project, our primary objectives were to identify a suitable topic and verify the availability of related data within the ArCo Knowledge Graph.
