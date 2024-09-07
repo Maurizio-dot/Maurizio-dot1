@@ -76,42 +76,51 @@ SELECT DISTINCT ?cp ?label
 
 From this list we selected [this artwork](https://dati.beniculturali.it/lodview-arco/resource/HistoricOrArtisticProperty/0900281487-0.html). This property will serve as the starting point for the second phase of our project.
 
+**UNION???**
+
 ___
 
 ### 2. Identifying missing data properties
 The second phase of our project involved searching for the IRIs (Internationalized Resource Identifiers) of the missing properties associated with the selected painting.
-In order to enrich the artwork with relevant triples, we employed Gemini using the Zero-Shot CoT technique to provide us with all the necessary information for its description:
+In order to enrich the artwork with relevant triples, we employed both Gemini and ChatGPT using the Zero-Shot CoT technique to provide us with all the necessary information for its description:
 
-<img width="456" alt="Immagine 2024-06-26 141056" src="https://github.com/Maurizio-dot/Maurizio-dot.github.io/assets/173699843/704f68f8-a4c6-46a5-a651-52fcf96d34aa"> 
+![Gemini](<img width="720" alt="GEMINI1" src="https://github.com/user-attachments/assets/74189669-aa22-40b4-af91-e38c928471a1">)
+![ChatGPT](https://github.com/user-attachments/assets/00af153f-bc2a-402d-a00e-f91bfa8a53f6)
+![ChatGPT1](https://github.com/user-attachments/assets/1dc6cdf9-efbc-4396-8d9d-1d3aa4b3dd73)
 
-For each of these properties (author, subjects, type of artwork, material and technique, and location), we identified their respective IRIs using the following queries:
-+ For **author**:
-```
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
-PREFIX arco: <https://w3id.org/arco/ontology/arco/> 
- SELECT DISTINCT  
-?hasAuthor ?label  
-WHERE {  
-?hasAuthor rdfs:label ?label  
-FILTER(?label = "Andrea Del Sarto") 
-}
-```
-[Results](https://dati.cultura.gov.it/sparql?default-graph-uri=&query=PREFIX+rdf%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E+%0D%0APREFIX+rdfs%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E+%0D%0APREFIX+arco%3A+%3Chttps%3A%2F%2Fw3id.org%2Farco%2Fontology%2Farco%2F%3E+%0D%0A+%0D%0ASELECT+DISTINCT++%0D%0A%3FhasAuthor+%3Flabel++%0D%0AWHERE+%7B++%0D%0A%0D%0A%3FhasAuthor+rdfs%3Alabel+%3Flabel++%0D%0AFILTER%28%3Flabel+%3D+%22Andrea+Del+Sarto%22%29+%0D%0A%7D%0D%0A%0D%0A%0D%0A%0D%0A&format=text%2Fhtml&timeout=0&signal_void=on).
+For each of these subjects, we identified their respective IRIs using the following queries:
 
-+ For **subject**:
++ For **Jesus Christ**:
 ```
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>  
 PREFIX arco: <https://w3id.org/arco/ontology/arco/>  
+
  SELECT DISTINCT   
 ?hasSubject ?label   
 WHERE {   
 ?hasSubject rdfs:label ?label   
-FILTER(?label = "Ultima Cena")  
+FILTER(?label = "Gesù Cristo")  
 }
+
 ```
-[Results](https://dati.cultura.gov.it/sparql?default-graph-uri=&query=PREFIX+rdf%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E++%0D%0APREFIX+rdfs%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E++%0D%0APREFIX+arco%3A+%3Chttps%3A%2F%2Fw3id.org%2Farco%2Fontology%2Farco%2F%3E++%0D%0A+SELECT+DISTINCT+++%0D%0A%3FhasSubject+%3Flabel+++%0D%0AWHERE+%7B+++%0D%0A%3FhasSubject+rdfs%3Alabel+%3Flabel+++%0D%0AFILTER%28%3Flabel+%3D+%22Ultima+Cena%22%29++%0D%0A%7D%0D%0A%0D%0A&format=text%2Fhtml&timeout=0&signal_void=on).
+[Results](https://dati.cultura.gov.it/sparql?default-graph-uri=&query=PREFIX+rdf%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E++%0D%0APREFIX+rdfs%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E++%0D%0APREFIX+arco%3A+%3Chttps%3A%2F%2Fw3id.org%2Farco%2Fontology%2Farco%2F%3E++%0D%0A%0D%0A+SELECT+DISTINCT+++%0D%0A%3FhasSubject+%3Flabel+++%0D%0AWHERE+%7B+++%0D%0A%3FhasSubject+rdfs%3Alabel+%3Flabel+++%0D%0AFILTER%28%3Flabel+%3D+%22Ges%C3%B9+Cristo%22%29++%0D%0A%7D%0D%0A%0D%0A&format=text%2Fhtml&timeout=0&signal_void=on).
+
++ For **Apostoli**:
+```
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>  
+PREFIX arco: <https://w3id.org/arco/ontology/arco/>  
+PREFIX a-cd: <https://w3id.org/arco/ontology/context-description/>
+ SELECT DISTINCT   
+?hasSubject ?label   
+WHERE {   
+?hasSubject rdfs:label ?label   
+FILTER(?label = "Apostoli")  
+}
+
+```
+[Results](https://dati.cultura.gov.it/sparql?default-graph-uri=&query=PREFIX+rdf%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E++%0D%0APREFIX+rdfs%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E++%0D%0APREFIX+arco%3A+%3Chttps%3A%2F%2Fw3id.org%2Farco%2Fontology%2Farco%2F%3E++%0D%0APREFIX+a-cd%3A+%3Chttps%3A%2F%2Fw3id.org%2Farco%2Fontology%2Fcontext-description%2F%3E%0D%0A+SELECT+DISTINCT+++%0D%0A%3FhasSubject+%3Flabel+++%0D%0AWHERE+%7B+++%0D%0A%3FhasSubject+rdfs%3Alabel+%3Flabel+++%0D%0AFILTER%28%3Flabel+%3D+%22Apostoli%22%29++%0D%0A%7D%0D%0A%0D%0A&format=text%2Fhtml&timeout=0&signal_void=on).
 
 + For **title**:
 ```
