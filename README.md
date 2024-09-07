@@ -35,20 +35,20 @@ The answer is [TRUE](https://dati.cultura.gov.it/sparql?default-graph-uri=&query
 Using SPARQL, we proceeded to count and sort properties associated with Andrea del Sarto by ordering them in descending order ("ORDER BY DESC"):
 
 ```
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX arco: <https://w3id.org/arco/ontology/arco/>
 PREFIX a-cd: <https://w3id.org/arco/ontology/context-description/>
-PREFIX agent: <https://w3id.org/arco/resource/Agent/>
-SELECT DISTINCT ?label COUNT(DISTINCT ?culturalProperty) AS ?n
+
+SELECT ?label (COUNT(DISTINCT ?culturalProperty) AS ?n)
 WHERE {
-?culturalProperty a arco:HistoricOrArtisticProperty ;
-a-cd:hasAuthor ?author .
-?author rdfs:label ?label
-FILTER(REGEX(?label, "Andrea del Sarto", "i"))
+  ?culturalProperty a arco:HistoricOrArtisticProperty ;
+                	a-cd:hasAuthor ?author .
+  ?author rdfs:label ?label .
+  FILTER(REGEX(?label, "Andrea del Sarto", "i"))
 }
 ORDER BY DESC(?n)
-LIMIT 100
-}
+
 ```
 
 [Results](https://dati.cultura.gov.it/sparql?default-graph-uri=&query=PREFIX+rdfs%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0D%0A+PREFIX+arco%3A+%3Chttps%3A%2F%2Fw3id.org%2Farco%2Fontology%2Farco%2F%3E%0D%0A+PREFIX+a-cd%3A+%3Chttps%3A%2F%2Fw3id.org%2Farco%2Fontology%2Fcontext-description%2F%3E%0D%0A+PREFIX+agent%3A+%3Chttps%3A%2F%2Fw3id.org%2Farco%2Fresource%2FAgent%2F%3E%0D%0A+SELECT+DISTINCT+%3Flabel+COUNT%28DISTINCT+%3FculturalProperty%29+AS+%3Fn%0D%0A+WHERE+%7B%0D%0A+%3FculturalProperty+a+arco%3AHistoricOrArtisticProperty+%3B%0D%0A+a-cd%3AhasAuthor+%3Fauthor+.%0D%0A+%3Fauthor+rdfs%3Alabel+%3Flabel%0D%0A+FILTER%28REGEX%28%3Flabel%2C+%22Andrea+del+Sarto%22%2C+%22i%22%29%29%0D%0A%7D%0D%0A+ORDER+BY+DESC%28%3Fn%29%0D%0A+LIMIT+100%0D%0A&format=text%2Fhtml&timeout=0&signal_void=on).  
