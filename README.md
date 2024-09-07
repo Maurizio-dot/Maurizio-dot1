@@ -141,111 +141,38 @@ FILTER(?label = "Il Cenacolo")
 ```
 [Results](https://dati.cultura.gov.it/sparql?default-graph-uri=&query=PREFIX+rdf%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E%0D%0APREFIX+rdfs%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0D%0APREFIX+arco%3A+%3Chttps%3A%2F%2Fw3id.org%2Farco%2Fontology%2Farco%2F%3E%0D%0ASELECT+DISTINCT+%0D%0A%3FhasTitle+%3Flabel+%0D%0AWHERE+%7B+%0D%0A%3FhasTitle+rdfs%3Alabel+%3Flabel+%0D%0AFILTER%28%3Flabel+%3D+%22Il+Cenacolo%22%29%0D%0A%7D%0D%0A%0D%0A%0D%0A&format=text%2Fhtml&timeout=0&signal_void=on).
 
-+ For **cultural property address**:
-```
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>   
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>   
-PREFIX arco: <https://w3id.org/arco/ontology/arco/>   
- SELECT DISTINCT    
-?hasCulturalPropertyAddress?label    
-WHERE {    
-?hasCulturalPropertyAddress rdfs:label ?label    
-FILTER(?label = "Toscana, FI, Firenze")   
-} 
-```
-[Results](https://dati.cultura.gov.it/sparql?default-graph-uri=&query=PREFIX+rdf%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E+++%0D%0APREFIX+rdfs%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E+++%0D%0APREFIX+arco%3A+%3Chttps%3A%2F%2Fw3id.org%2Farco%2Fontology%2Farco%2F%3E+++%0D%0A+SELECT+DISTINCT++++%0D%0A%3FhasCulturalPropertyAddress%3Flabel++++%0D%0AWHERE+%7B++++%0D%0A%3FhasCulturalPropertyAddress+rdfs%3Alabel+%3Flabel++++%0D%0AFILTER%28%3Flabel+%3D+%22Toscana%2C+FI%2C+Firenze%22%29+++%0D%0A%7D+%0D%0A%0D%0A%0D%0A&format=text%2Fhtml&timeout=0&signal_void=on).
-
-+ For **cultural institute or site**:
-```
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>    
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>    
-PREFIX arco: <https://w3id.org/arco/ontology/arco/>    
- SELECT DISTINCT     
-?hasCulturalInstituteOrSite ?label     
-WHERE {     
-?hasCulturalInstituteOrSite rdfs:label ?label     
-FILTER(?label = "Museo del Cenacolo di Andrea del Sarto")    
-}  
-```
-[Results](https://dati.cultura.gov.it/sparql?default-graph-uri=&query=PREFIX+rdf%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E++++%0D%0APREFIX+rdfs%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E++++%0D%0APREFIX+arco%3A+%3Chttps%3A%2F%2Fw3id.org%2Farco%2Fontology%2Farco%2F%3E++++%0D%0A+SELECT+DISTINCT+++++%0D%0A%3FhasCulturalInstituteOrSite+%3Flabel+++++%0D%0AWHERE+%7B+++++%0D%0A%3FhasCulturalInstituteOrSite+rdfs%3Alabel+%3Flabel+++++%0D%0AFILTER%28%3Flabel+%3D+%22Museo+del+Cenacolo+di+Andrea+del+Sarto%22%29++++%0D%0A%7D++%0D%0A&format=text%2Fhtml&timeout=0&signal_void=on.).
-
-Only for "affresco" we were unable to identify its corresponding property ("Type of Artwork"). Therefore, we directly asked ChatGPT to provide us with the correct property using the Few-Shot Prompting technique:
-
-<img width="482" alt="lol" src="https://github.com/Maurizio-dot/Maurizio-dot.github.io/assets/173699843/32cc0882-c82d-4c82-931a-142704bfef93">
-
-The problem is that the property "hasType" does not exist in ArCo's Denotative Description. The closest property we found is "hasCulturalPropertyType." Therefore, we revised the query, replacing "hasType" with "hasCulturalPropertyType":
-
-```
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX arco: <https://w3id.org/arco/ontology/arco/>
-SELECT DISTINCT 
-?hasCulturalPropertyType ?label 
-WHERE { 
-?hasCulturalPropertyType rdfs:label ?label 
-FILTER(?label = "affresco")
-}
-```
-[Results](https://dati.cultura.gov.it/sparql?default-graph-uri=&query=PREFIX+rdf%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E%0D%0APREFIX+rdfs%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0D%0APREFIX+arco%3A+%3Chttps%3A%2F%2Fw3id.org%2Farco%2Fontology%2Farco%2F%3E%0D%0ASELECT+DISTINCT+%0D%0A%3FhasCulturalPropertyType+%3Flabel+%0D%0AWHERE+%7B+%0D%0A%3FhasCulturalPropertyType+rdfs%3Alabel+%3Flabel+%0D%0AFILTER%28%3Flabel+%3D+%22affresco%22%29%0D%0A%7D%0D%0A%0D%0A%0D%0A&format=text%2Fhtml&timeout=0&signal_void=on).
-
-In Gemini, the term "affresco" was used to describe both the painting technique and the material used to execute it. However, in ArCo, these aspects are grouped together under a single property, namely: a-dd:hasMaterialorTechnique.
-As a final check, we asked ChatGPT using the Generated Knowledge Technique to determine if "pittura a fresco" and "affresco" meant the same thing:
-
-<img width="526" alt="non ce la faccio piu" src="https://github.com/Maurizio-dot/Maurizio-dot.github.io/assets/173699843/ad298b60-d56b-458c-95ba-10ff0a837ba6"> 
-
-Therefore, to search for the IRI corresponding to the word "affresco" or "pittura a fresco", we created the following query for `a-dd:MaterialOrTechnique`:
-
-```
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX arco: <https://w3id.org/arco/ontology/arco/>
-
-SELECT DISTINCT 
-?MaterialorTechnique ?label 
-WHERE { 
-?MaterialorTechnique rdfs:label ?label 
-FILTER(?label = "pittura a fresco")
-}
-```
-[Results](https://dati.cultura.gov.it/sparql?default-graph-uri=&query=PREFIX+rdf%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E%0D%0APREFIX+rdfs%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0D%0APREFIX+arco%3A+%3Chttps%3A%2F%2Fw3id.org%2Farco%2Fontology%2Farco%2F%3E%0D%0A%0D%0ASELECT+DISTINCT+%0D%0A%3FMaterialorTechnique+%3Flabel+%0D%0AWHERE+%7B+%0D%0A%3FMaterialorTechnique+rdfs%3Alabel+%3Flabel+%0D%0AFILTER%28%3Flabel+%3D+%22pittura+a+fresco%22%29%0D%0A%7D%0D%0A%0D%0A%0D%0A&format=text%2Fhtml&timeout=0&signal_void=on).
-
+AGGIUNGERE PARTE SU CHIAROSCURO
 ___
 
 ### 3. Creating new RDF triples
-The third and final phase of the project involves creating triples to link to the entity "Il Cenacolo di Andrea del Sarto, Ultima Cena." We created new sets of triples by linking our [subject](https://dati.beniculturali.it/lodview/mibact/eventi/resource/CreativeWork/13596_.html) to its respective objects using adequate predicates: 
+The third and final phase of the project involves creating triples to link to the artwork. We created new sets of triples by linking our [subject](https://dati.beniculturali.it/lodview-arco/resource/HistoricOrArtisticProperty/0900281487-0.html) to its respective objects using adequate predicates: 
 
 #### Triple 1
 ***A-cd:hasAuthor***
-+ [**Subject**](https://dati.beniculturali.it/lodview/mibact/eventi/resource/CreativeWork/13596_.html)
-+ **Predicate**: hasAuthor
-+ **Object (Andrea del Sarto)**: [https://w3id.org/arco/resource/Agent/11c57796fc5920fdba4b92fd459c0200](https://w3id.org/arco/resource/Agent/11c57796fc5920fdba4b92fd459c0200)
++ [**Subject**](https://dati.beniculturali.it/lodview-arco/resource/HistoricOrArtisticProperty/0900281487-0.html)
++ **Predicate**: hasSubject [https://w3id.org/arco/ontology/context-description/hasSubject](https://w3id.org/arco/ontology/context-description/hasSubject)
++ **Object (Jesus Christ)**: [https://w3id.org/arco/resource/Subject/d767f5be4cd2be535a6d08e9019cca61](https://w3id.org/arco/resource/Subject/d767f5be4cd2be535a6d08e9019cca61​) 
 
 #### Triple 2
 ***A-cd:hasSubject***
-+ [**Subject**](https://dati.beniculturali.it/lodview/mibact/eventi/resource/CreativeWork/13596_.html)
++ [**Subject**](https://dati.beniculturali.it/lodview-arco/resource/HistoricOrArtisticProperty/0900281487-0.html)
 + **Predicate**: hasSubject [https://w3id.org/arco/ontology/context-description/hasSubject](https://w3id.org/arco/ontology/context-description/hasSubject)
-+ **Object (Ultima Cena)**: [https://w3id.org/arco/resource/Subject/fff38876918a8a316e826d2ccc81f537](https://w3id.org/arco/resource/Subject/fff38876918a8a316e826d2ccc81f537)
++ **Object (Apostoli)**: [https://w3id.org/arco/resource/Subject/cde2df599f8d502cb7d74d2dfed1a9db​](https://w3id.org/arco/resource/Subject/cde2df599f8d502cb7d74d2dfed1a9db​)
 
 #### Triple 3
 ***A-cd:hasTitle***
-+ [**Subject**](https://dati.beniculturali.it/lodview/mibact/eventi/resource/CreativeWork/13596_.html)
-+ **Predicate**: a-cd:hasTitle [https://w3id.org/arco/ontology/context-description/Title](https://w3id.org/arco/ontology/context-description/Title) 
-+ **Object (Il Cenacolo)**: [https://w3id.org/arco/resource/Title/0300179928-il-cenacolo](https://w3id.org/arco/resource/Title/0300179928-il-cenacolo)
++ [**Subject**](https://dati.beniculturali.it/lodview-arco/resource/HistoricOrArtisticProperty/0900281487-0.html)
++ **Predicate**:a-dd:includesTechnicalCharacteristic [https://w3id.org/arco/ontology/denotative-description/TechnicalCharacteristic](https://w3id.org/arco/ontology/denotative-description/TechnicalCharacteristic) 
++ **Object (chiaroscuro)**: [https://w3id.org/arco/resource/TechnicalCharacteristic/chiaroscuro](https://w3id.org/arco/resource/TechnicalCharacteristic/chiaroscuro)
 
 #### Triple 4
-***A-loc:hasCulturalPropertyAddress***
-+ [**Subject**](https://dati.beniculturali.it/lodview/mibact/eventi/resource/CreativeWork/13596_.html)
-+ **Predicate**: a-loc:hasCulturalPropertyAddress ([a-loc:hasCulturalPropertyAddress](a-loc:hasCulturalPropertyAddress))
-+ **Object (Toscana, FI, Firenze)**: [https://dati.beniculturali.it/lodview-arco/resource/Address/4287e9f9192e011971297d4609f2f41c.html](https://dati.beniculturali.it/lodview-arco/resource/Address/4287e9f9192e011971297d4609f2f41c.html) 
+***Circumstance Type***
++ [**Subject**](https://dati.beniculturali.it/lodview-arco/resource/HistoricOrArtisticProperty/0900281487-0.html)
++ **Predicate**: Circumstance Type [https://w3id.org/arco/ontology/context-description/CircumstanceType​](https://w3id.org/arco/ontology/context-description/CircumstanceType​)
++ **Object (Religious Circumstance)**: [https://w3id.org/arco/ontology/context-description/ReligiousCircumstance](https://w3id.org/arco/ontology/context-description/ReligiousCircumstance​) 
 
 #### Triple 5
-***A-loc:hasCulturalInstituteOrSite***
-+ [**Subject**](https://dati.beniculturali.it/lodview/mibact/eventi/resource/CreativeWork/13596_.html)
-+ **Predicate**: a-loc:hasCulturalInstituteOrSite ([https://w3id.org/arco/ontology/location/hasCulturalInstituteOrSite](https://w3id.org/arco/ontology/location/hasCulturalInstituteOrSite)) 
-+ **Object (Museo del Cenacolo di Andrea del Sarto)**: [https://w3id.org/arco/resource/CulturalInstituteOrSite/610717aa4ebd312c305eb06dcc4d740a](https://w3id.org/arco/resource/CulturalInstituteOrSite/610717aa4ebd312c305eb06dcc4d740a)
-
-#### Triple 6
-***A-dd:hasMaterialorTechnique***
-+ [**Subject**](https://dati.beniculturali.it/lodview/mibact/eventi/resource/CreativeWork/13596_.html)
-+ **Predicate**: a-dd:hasMaterialorTechnique ([https://w3id.org/arco/ontology/denotative-description/MaterialOrTechnique](https://w3id.org/arco/ontology/denotative-description/MaterialOrTechnique))
-+ **Object (intonaco / pittura a fresco)**: [https://w3id.org/arco/resource/TechnicalCharacteristic/intonaco-pittura-a-fresco](https://w3id.org/arco/resource/TechnicalCharacteristic/intonaco-pittura-a-fresco) 
+***a-cd:hasTitle***
++ [**Subject**](https://dati.beniculturali.it/lodview-arco/resource/HistoricOrArtisticProperty/0900281487-0.html)
++ **Predicate**: a-cd:hasTitle ([https://w3id.org/arco/ontology/context-description/Title​](https://w3id.org/arco/ontology/context-description/Title​)) 
++ **Object (Il Cenacolo)**: [https://w3id.org/arco/resource/Title/0300158497-il-cenacolo](https://w3id.org/arco/resource/Title/0300158497-il-cenacolo)
