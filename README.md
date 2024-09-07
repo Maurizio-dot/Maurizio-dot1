@@ -51,44 +51,9 @@ ORDER BY DESC(?n)
 
 ```
 
-[Results](https://dati.cultura.gov.it/sparql?default-graph-uri=&query=PREFIX+rdfs%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0D%0A+PREFIX+arco%3A+%3Chttps%3A%2F%2Fw3id.org%2Farco%2Fontology%2Farco%2F%3E%0D%0A+PREFIX+a-cd%3A+%3Chttps%3A%2F%2Fw3id.org%2Farco%2Fontology%2Fcontext-description%2F%3E%0D%0A+PREFIX+agent%3A+%3Chttps%3A%2F%2Fw3id.org%2Farco%2Fresource%2FAgent%2F%3E%0D%0A+SELECT+DISTINCT+%3Flabel+COUNT%28DISTINCT+%3FculturalProperty%29+AS+%3Fn%0D%0A+WHERE+%7B%0D%0A+%3FculturalProperty+a+arco%3AHistoricOrArtisticProperty+%3B%0D%0A+a-cd%3AhasAuthor+%3Fauthor+.%0D%0A+%3Fauthor+rdfs%3Alabel+%3Flabel%0D%0A+FILTER%28REGEX%28%3Flabel%2C+%22Andrea+del+Sarto%22%2C+%22i%22%29%29%0D%0A%7D%0D%0A+ORDER+BY+DESC%28%3Fn%29%0D%0A+LIMIT+100%0D%0A&format=text%2Fhtml&timeout=0&signal_void=on).  
+[Results](https://dati.cultura.gov.it/sparql?default-graph-uri=&query=PREFIX+rdf%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E%0D%0APREFIX+rdfs%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0D%0APREFIX+arco%3A+%3Chttps%3A%2F%2Fw3id.org%2Farco%2Fontology%2Farco%2F%3E%0D%0APREFIX+a-cd%3A+%3Chttps%3A%2F%2Fw3id.org%2Farco%2Fontology%2Fcontext-description%2F%3E%0D%0A%0D%0ASELECT+%3Flabel+%28COUNT%28DISTINCT+%3FculturalProperty%29+AS+%3Fn%29%0D%0AWHERE+%7B%0D%0A++%3FculturalProperty+a+arco%3AHistoricOrArtisticProperty+%3B%0D%0A++++++++++++++++%09a-cd%3AhasAuthor+%3Fauthor+.%0D%0A++%3Fauthor+rdfs%3Alabel+%3Flabel+.%0D%0A++FILTER%28REGEX%28%3Flabel%2C+%22Andrea+del+Sarto%22%2C+%22i%22%29%29%0D%0A%7D%0D%0AORDER+BY+DESC%28%3Fn%29%0D%0A&format=text%2Fhtml&timeout=0&signal_void=on).  
 
-With the quantitative data in hand, we need the titles of the entities we want to enrich. Therefore, we asked ChatGPT to formulate a query to identify all paintings associated with Andrea del Sarto including the date, if present:
-
-```
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX arco: <https://w3id.org/arco/ontology/arco/>
-
-SELECT ?author ?label ?creationDate
-WHERE { 
-  ?author a arco:HistoricOrArtisticProperty ;
-          rdfs:label ?label ;
-          arco:creationDate ?creationDate .
-  FILTER(REGEX(?label, "Andrea del Sarto", "i"))
-}
-ORDER BY ?creationDate
-```
-
-Since `?creationDate` does not exist in ArCo, we asked ChatGPT to modify the query by replacing it with `?Date`.
-```
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX arco: <https://w3id.org/arco/ontology/arco/>
-PREFIX dcterms: <http://purl.org/dc/terms/>
-
-SELECT ?author ?label ?date
-WHERE { 
-  ?author a arco:HistoricOrArtisticProperty ;
-          rdfs:label ?label .
-  OPTIONAL { ?author dcterms:date ?date } .
-  FILTER(REGEX(?label, "Andrea del Sarto", "i"))
-}
-ORDER BY ?date
-```
-We made further modifications to the initial query:
-1. Modified `SELECT ?author ?label ?date` to `SELECT DISTINCT ?paintings ?label` to eliminate duplicates and include all paintings with the date, if present;
-2. Removed `ORDER BY ?date` as it was irrelevant in this context, and added `LIMIT 20` to narrow down the results.
+With the quantitative data in hand, we need the titles of the entities we want to enrich. Therefore, we formulated a query to identify all paintings associated with Andrea del Sarto including the date, if present:
 
 ```
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
@@ -96,44 +61,20 @@ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX arco: <https://w3id.org/arco/ontology/arco/>
 PREFIX dcterms: <http://purl.org/dc/terms/>
 
-SELECT DISTINCT ?paintings ?label
+SELECT DISTINCT ?cp ?label
  WHERE {
-?paintings rdfs:label ?label
-OPTIONAL { ?author dcterms:date ?date } .
-FILTER(REGEX(?label,  "Andrea del Sarto", "i"))
+  ?cp a arco:HistoricOrArtisticProperty ;
+  	rdfs:label ?label .
+  OPTIONAL { ?cp dcterms:date ?date } .
+  FILTER(LANG(?label) = "it") .
+  FILTER(REGEX(?label, "Andrea del sarto", "i"))
 }
-LIMIT 20
-```
-
-[Results](https://dati.cultura.gov.it/sparql?default-graph-uri=&query=PREFIX+rdf%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E%0D%0APREFIX+rdfs%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0D%0APREFIX+arco%3A+%3Chttps%3A%2F%2Fw3id.org%2Farco%2Fontology%2Farco%2F%3E%0D%0APREFIX+dcterms%3A+%3Chttp%3A%2F%2Fpurl.org%2Fdc%2Fterms%2F%3E%0D%0A%0D%0ASELECT+DISTINCT+%3Fpaintings+%3Flabel%0D%0A+WHERE+%7B%0D%0A%3Fpaintings+rdfs%3Alabel+%3Flabel%0D%0AOPTIONAL+%7B+%3Fauthor+dcterms%3Adate+%3Fdate+%7D+.%0D%0AFILTER%28REGEX%28%3Flabel%2C++%22Andrea+del+Sarto%22%2C+%22i%22%29%29%0D%0A%7D%0D%0ALIMIT+20%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A&format=text%2Fhtml&timeout=0&signal_void=on).
-
-As a data verification we added to the previous query the `UNION` keyword to merge results from two patterns, one related to works by "Andrea del Sarto" and another related to works with "Cenacolo" in their labels:
 
 ```
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX arco: <https://w3id.org/arco/ontology/arco/>
-PREFIX dcterms: <http://purl.org/dc/terms/>
 
-SELECT DISTINCT ?item ?label ?date
-WHERE {
-  {
-	?item rdfs:label ?label .
-	?item dcterms:creator ?author .
-	?author rdfs:label ?authorLabel .
-	FILTER(REGEX(?authorLabel, "Andrea del Sarto", "i")) .
-	OPTIONAL { ?item dcterms:date ?date } .
-  } UNION {
-	?item rdfs:label ?label .
-	FILTER(REGEX(?label, "Cenacolo", "i")) .
-  }
-}
-LIMIT 20
-```
+[Results](https://dati.cultura.gov.it/sparql?default-graph-uri=&query=PREFIX+rdf%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E%0D%0APREFIX+rdfs%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0D%0APREFIX+arco%3A+%3Chttps%3A%2F%2Fw3id.org%2Farco%2Fontology%2Farco%2F%3E%0D%0APREFIX+dcterms%3A+%3Chttp%3A%2F%2Fpurl.org%2Fdc%2Fterms%2F%3E%0D%0A%0D%0ASELECT+DISTINCT+%3Fcp+%3Flabel%0D%0A+WHERE+%7B%0D%0A++%3Fcp+a+arco%3AHistoricOrArtisticProperty+%3B%0D%0A++%09rdfs%3Alabel+%3Flabel+.%0D%0A++OPTIONAL+%7B+%3Fcp+dcterms%3Adate+%3Fdate+%7D+.%0D%0A++FILTER%28LANG%28%3Flabel%29+%3D+%22it%22%29+.%0D%0A++FILTER%28REGEX%28%3Flabel%2C+%22Andrea+del+sarto%22%2C+%22i%22%29%29%0D%0A%7D%0D%0A%0D%0A&format=text%2Fhtml&timeout=0&signal_void=on).
 
-[Results](https://dati.cultura.gov.it/sparql?default-graph-uri=&query=PREFIX+rdf%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E%0D%0APREFIX+rdfs%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0D%0APREFIX+arco%3A+%3Chttps%3A%2F%2Fw3id.org%2Farco%2Fontology%2Farco%2F%3E%0D%0APREFIX+dcterms%3A+%3Chttp%3A%2F%2Fpurl.org%2Fdc%2Fterms%2F%3E%0D%0A%0D%0ASELECT+DISTINCT+%3Fitem+%3Flabel+%3Fdate%0D%0AWHERE+%7B%0D%0A++%7B%0D%0A%09%3Fitem+rdfs%3Alabel+%3Flabel+.%0D%0A%09%3Fitem+dcterms%3Acreator+%3Fauthor+.%0D%0A%09%3Fauthor+rdfs%3Alabel+%3FauthorLabel+.%0D%0A%09FILTER%28REGEX%28%3FauthorLabel%2C+%22Andrea+del+Sarto%22%2C+%22i%22%29%29+.%0D%0A%09OPTIONAL+%7B+%3Fitem+dcterms%3Adate+%3Fdate+%7D+.%0D%0A++%7D+UNION+%7B%0D%0A%09%3Fitem+rdfs%3Alabel+%3Flabel+.%0D%0A%09FILTER%28REGEX%28%3Flabel%2C+%22Cenacolo%22%2C+%22i%22%29%29+.%0D%0A++%7D%0D%0A%7D%0D%0ALIMIT+20%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A&format=text%2Fhtml&timeout=0&signal_void=on).
-
-From this list, we identified one painting that did not already have a significant amount of information associated with it: [click here to visualise it](https://dati.beniculturali.it/lodview/mibact/eventi/resource/CreativeWork/13596_.html). This property will serve as the starting point for the second phase of our project.
+From this list we selected [this artwork](https://dati.beniculturali.it/lodview-arco/resource/HistoricOrArtisticProperty/0900281487-0.html). This property will serve as the starting point for the second phase of our project.
 
 ___
 
