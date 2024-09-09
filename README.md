@@ -103,7 +103,7 @@ The objectives of these phases are as follows:
 + **Employing Different Approaches with LLM to Retrieve Information**;
 + **Searching for the IRIs (Internationalized Resource Identifiers) of the Missing Properties**;
 + **Suggesting Improvements by Creating New RDF Triples**.
-  
+
 We started the enrichment from the subject of the work, which on ArCo includes several entities under one label: *Ultima cena, Trinità, Santi*. By contrast, we want to associate each of the depicted entities separately in order to provide a more detailed and precise description. For this reason, we asked ChatGPT through the **Zero-Shot CoT** technique to identify key subjects within the artwork and enrich their associations with the cultural property:
 
 ![ChatGPT](https://github.com/user-attachments/assets/00af153f-bc2a-402d-a00e-f91bfa8a53f6)
@@ -167,7 +167,6 @@ For greater completeness, we asked Gemini the same question again:
 
 ![Gemini gkp](https://github.com/user-attachments/assets/219fa315-9e6a-439e-a190-da122ba6b26e)
 
-
 Asking the same question to Gemini, we noticed different types of responses between the two LLMs:​
 + With the first question, while ChatGPT answered “no”, Gemini answered “yes”​
 + Despite applying a generated knowledge prompting technique, Gemini did not provide us with much information compared to ChatGPT​
@@ -191,30 +190,31 @@ We asked to transform this information into an RDF triple using Arco ontology, h
 
 In both cases, ChatGPT and Gemini gave us the incorrect class for "chiaroscuro". The solution was checking Arco's denotative description and correcting the class with **a-dd:includesTechnicalCharacteristic**
 
-
-
-
-+ For **title**:
++ For **chiaroscuro**:
   
 ```
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX arco: <https://w3id.org/arco/ontology/arco/>
-SELECT DISTINCT 
-?hasTitle ?label 
-WHERE { 
-?hasTitle rdfs:label ?label 
-FILTER(?label = "Il Cenacolo")
+SELECT DISTINCT
+?MaterialorTechnique ?label
+WHERE {
+?MaterialorTechnique rdfs:label ?label
+FILTER(?label = "chiaroscuro")
 }
 
 ```
-[Results](https://dati.cultura.gov.it/sparql?default-graph-uri=&query=PREFIX+rdf%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E%0D%0APREFIX+rdfs%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0D%0APREFIX+arco%3A+%3Chttps%3A%2F%2Fw3id.org%2Farco%2Fontology%2Farco%2F%3E%0D%0ASELECT+DISTINCT+%0D%0A%3FhasTitle+%3Flabel+%0D%0AWHERE+%7B+%0D%0A%3FhasTitle+rdfs%3Alabel+%3Flabel+%0D%0AFILTER%28%3Flabel+%3D+%22Il+Cenacolo%22%29%0D%0A%7D%0D%0A%0D%0A%0D%0A&format=text%2Fhtml&timeout=0&signal_void=on).
+[Results](https://dati.cultura.gov.it/sparql?default-graph-uri=&query=PREFIX+rdf%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E%0D%0APREFIX+rdfs%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0D%0APREFIX+arco%3A+%3Chttps%3A%2F%2Fw3id.org%2Farco%2Fontology%2Farco%2F%3E%0D%0ASELECT+DISTINCT%0D%0A%3FMaterialorTechnique+%3Flabel%0D%0AWHERE+%7B%0D%0A%3FMaterialorTechnique+rdfs%3Alabel+%3Flabel%0D%0AFILTER%28%3Flabel+%3D+%22chiaroscuro%22%29%0D%0A%7D%0D%0A&format=text%2Fhtml&timeout=0&signal_void=on).
 
-AGGIUNGERE PARTE SU CHIAROSCURO
-___
+#### Triple 3
+***a-dd:includesTechnicalCharacteristic***
++ [**Subject**](https://dati.beniculturali.it/lodview-arco/resource/HistoricOrArtisticProperty/0900281487-0.html)
++ **Predicate**: a-dd:includesTechnicalCharacteristic [https://w3id.org/arco/ontology/denotative-description/TechnicalCharacteristic](https://w3id.org/arco/ontology/denotative-description/TechnicalCharacteristic) 
++ **Object (chiaroscuro)**: [https://w3id.org/arco/resource/TechnicalCharacteristic/chiaroscuro](https://w3id.org/arco/resource/TechnicalCharacteristic/chiaroscuro)
 
+Since our artwork in Arco is titled as *Ultima Cena, Trinità, Santi*, we wanted to know whether there was a specific title to describe all of them. Furthermore the class for «title» was missing within the page.​ We asked ChatGPT through the Zero-Shot technique to provide us with this information: 
 
-
+SCREEN SLIDE 19
 
 #### Triple 3
 ***A-cd:hasTitle***
