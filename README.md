@@ -225,7 +225,9 @@ At this point, we wondered whether The Last Supper was the title attributed by t
 <img width="307" alt="Immagine7" src="https://github.com/user-attachments/assets/bf1ec9c5-ecee-4a01-9211-a1c956b351f9">
 
 
-SLIDE 20
+
+<img width="307" alt="Immagine7" src="https://github.com/user-attachments/assets/7da005fd-3521-438d-8757-0ccf6369b3b7">
+
 
 This means that both *Ultima Cena* and *Il Cenacolo* are valid as titles​. So, the next step consists in formulating a query that looks simultaneously for the IRIs of both titles:
 
