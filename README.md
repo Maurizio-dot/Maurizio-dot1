@@ -217,19 +217,15 @@ FILTER(?label = "chiaroscuro")
 
 Since our artwork in Arco is titled as *Ultima Cena, Trinità, Santi*, we wanted to know whether there was a specific title to describe all of them. Furthermore the class for «title» was missing within the page.​ We asked ChatGPT through the Zero-Shot technique to provide us with this information: 
 
-SCREEN SLIDE 19
+![Immagine 2024-09-09 171109](https://github.com/user-attachments/assets/34cb4f95-e2a8-45a5-884b-e9e9faf0faf7)
 
-#### Triple 3
+
+#### Triple 4
 ***A-cd:hasTitle***
 + [**Subject**](https://dati.beniculturali.it/lodview-arco/resource/HistoricOrArtisticProperty/0900281487-0.html)
 + **Predicate**:a-dd:includesTechnicalCharacteristic [https://w3id.org/arco/ontology/denotative-description/TechnicalCharacteristic](https://w3id.org/arco/ontology/denotative-description/TechnicalCharacteristic) 
 + **Object (chiaroscuro)**: [https://w3id.org/arco/resource/TechnicalCharacteristic/chiaroscuro](https://w3id.org/arco/resource/TechnicalCharacteristic/chiaroscuro)
 
-#### Triple 4
-***Circumstance Type***
-+ [**Subject**](https://dati.beniculturali.it/lodview-arco/resource/HistoricOrArtisticProperty/0900281487-0.html)
-+ **Predicate**: Circumstance Type [https://w3id.org/arco/ontology/context-description/CircumstanceType​](https://w3id.org/arco/ontology/context-description/CircumstanceType​)
-+ **Object (Religious Circumstance)**: [https://w3id.org/arco/ontology/context-description/ReligiousCircumstance](https://w3id.org/arco/ontology/context-description/ReligiousCircumstance​) 
 
 #### Triple 5
 ***a-cd:hasTitle***
