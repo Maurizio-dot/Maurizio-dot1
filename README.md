@@ -14,7 +14,7 @@ We used the Zero-Shot technique asking ChatGPT to generate a list of lesser-know
 <img width="577" alt="Screenshot 2024-06-26 120120" src="https://github.com/Maurizio-dot/Maurizio-dot.github.io/assets/173699843/e37bcd50-6f29-46ed-bd95-bc384db8eec6">
 ![Cattura 1](https://github.com/Maurizio-dot/Maurizio-dot.github.io/assets/173814358/808ef577-f686-46c3-ba5d-4fa9ca5b4424)
 
-From this list we selected Andrea del Sarto. To verify the existence of properties associated with Andrea del Sarto within ArCo, we formulated the following ASK query:
+From this list we selected Andrea del Sarto. To verify the existence of properties authored by Andrea del Sarto within ArCo, we formulated the following ASK query:
 ```
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -94,13 +94,16 @@ LIMIT 50
 
 From this list we selected [this artwork](https://dati.beniculturali.it/lodview-arco/resource/HistoricOrArtisticProperty/0900281487-0.html). This property will serve as the starting point for the second phase of our project.
 
-**UNION???**
-
 ___
 
-### 2. Identifying missing data properties
-The second phase of our project involved searching for the IRIs (Internationalized Resource Identifiers) of the missing properties associated with the selected painting.
-In order to enrich the artwork with relevant triples, we employed both Gemini and ChatGPT using the Zero-Shot CoT technique to provide us with all the necessary information for its description:
+### Project phases 2 and 3: identifying missing data properties to create new RDF triples
+The objectives of the second phase of our project are as follows:
++ **Identifying Missing Data Properties of the Artwork**;
++ **Employing Different Approaches with LLM to Retrieve Information**;
++ **Searching for the IRIs (Internationalized Resource Identifiers) of the Missing Properties**;
++ **Suggesting Improvements by Creating New RDF Triples**.
+  
+We started the enrichment from the subject of the work, which on ArCo includes several entities under one label: *Ultima cena, Trinità, Santi*. By contrast, we want to associate each of the depicted entities separately in order to provide a more detailed and precise description. For this reason, we asked ChatGPT through the Zero-Shot CoT technique to enhance the ‘a-cd:hasSubject’ relationship between the cultural asset ‘Last Supper’ by Andrea del Sarto and the subjects it represents. 
 
 ![Gemini](<img width="720" alt="GEMINI1" src="https://github.com/user-attachments/assets/74189669-aa22-40b4-af91-e38c928471a1">)
 ![ChatGPT](https://github.com/user-attachments/assets/00af153f-bc2a-402d-a00e-f91bfa8a53f6)
