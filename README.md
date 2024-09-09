@@ -126,6 +126,7 @@ FILTER(?label = "Gesù Cristo")
 }
 
 ```
+[Results](https://dati.cultura.gov.it/sparql?default-graph-uri=&query=PREFIX+rdf%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E++%0D%0APREFIX+rdfs%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E++%0D%0APREFIX+arco%3A+%3Chttps%3A%2F%2Fw3id.org%2Farco%2Fontology%2Farco%2F%3E++%0D%0A%0D%0A+SELECT+DISTINCT+++%0D%0A%3FhasSubject+%3Flabel+++%0D%0AWHERE+%7B+++%0D%0A%3FhasSubject+rdfs%3Alabel+%3Flabel+++%0D%0AFILTER%28%3Flabel+%3D+%22Ges%C3%B9+Cristo%22%29++%0D%0A%7D%0D%0A%0D%0A%0D%0A&format=text%2Fhtml&timeout=0&signal_void=on). 
 
 + For **Apostoli**:
   
@@ -169,7 +170,7 @@ For greater completeness, we asked Gemini the same question again:
 
 
 Asking the same question to Gemini, we noticed different types of responses between the two LLMs:​
-+ With the first question, while ChatGPT answered “no”, Gemini answered “yes”​
++ As far as the first question is concerned, while ChatGPT answered “no”, Gemini answered “yes”​
 + Despite applying a generated knowledge prompting technique, Gemini did not provide us with much information compared to ChatGPT​
 
 Once we know that «chiaroscuro» could be added as a technical feature, we asked ChatGPT through the **Few Shot Prompting** technique to provide us with the correct class in Arco:
@@ -180,7 +181,6 @@ Once we know that «chiaroscuro» could be added as a technical feature, we aske
 Then, we asked it to transform this information into an RDF triple:
 
 ![Immagine 2024-09-09 170649](https://github.com/user-attachments/assets/e7e8da23-b0c2-4112-953d-20fffccc97d5)
-
 
 We used the same technique on Gemini to compare the two answers: 
 
@@ -207,6 +207,7 @@ FILTER(?label = "chiaroscuro")
 }
 
 ```
+
 [Results](https://dati.cultura.gov.it/sparql?default-graph-uri=&query=PREFIX+rdf%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E%0D%0APREFIX+rdfs%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0D%0APREFIX+arco%3A+%3Chttps%3A%2F%2Fw3id.org%2Farco%2Fontology%2Farco%2F%3E%0D%0ASELECT+DISTINCT%0D%0A%3FMaterialorTechnique+%3Flabel%0D%0AWHERE+%7B%0D%0A%3FMaterialorTechnique+rdfs%3Alabel+%3Flabel%0D%0AFILTER%28%3Flabel+%3D+%22chiaroscuro%22%29%0D%0A%7D%0D%0A&format=text%2Fhtml&timeout=0&signal_void=on).
 
 #### Triple 3
@@ -219,12 +220,38 @@ Since our artwork in Arco is titled as *Ultima Cena, Trinità, Santi*, we wanted
 
 ![Immagine 2024-09-09 171109](https://github.com/user-attachments/assets/34cb4f95-e2a8-45a5-884b-e9e9faf0faf7)
 
+At this point, we wondered whether The Last Supper was the title attributed by the author himself or whether it had been attributed posthumously so that it could be associated with the right predicate: 
+
+SLIDE 20
+SLIDE 20
+
+This means that both *Ultima Cena* and *Il Cenacolo* are valid as titles​. So, the next step consists in formulating a query that looks simultaneously for the IRIs of both titles:
+
+```
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX arco: <https://w3id.org/arco/ontology/arco/>
+
+SELECT DISTINCT 
+?hasTitle ?label 
+WHERE { 
+  { 
+    ?hasTitle rdfs:label ?label .
+    FILTER(?label = "Il Cenacolo")
+  } 
+  UNION 
+  { 
+    ?hasTitle rdfs:label ?label .
+    FILTER(?label = "Ultima Cena")
+  }
+}
+```
+[Results](https://dati.cultura.gov.it/sparql?default-graph-uri=&query=PREFIX+rdf%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E%0D%0APREFIX+rdfs%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0D%0APREFIX+arco%3A+%3Chttps%3A%2F%2Fw3id.org%2Farco%2Fontology%2Farco%2F%3E%0D%0A%0D%0ASELECT+DISTINCT+%0D%0A%3FhasTitle+%3Flabel+%0D%0AWHERE+%7B+%0D%0A++%7B+%0D%0A++++%3FhasTitle+rdfs%3Alabel+%3Flabel+.%0D%0A++++FILTER%28%3Flabel+%3D+%22Il+Cenacolo%22%29%0D%0A++%7D+%0D%0A++UNION+%0D%0A++%7B+%0D%0A++++%3FhasTitle+rdfs%3Alabel+%3Flabel+.%0D%0A++++FILTER%28%3Flabel+%3D+%22Ultima+Cena%22%29%0D%0A++%7D%0D%0A%7D%0D%0A%0D%0A&format=text%2Fhtml&timeout=0&signal_void=on).
 
 #### Triple 4
-***A-cd:hasTitle***
 + [**Subject**](https://dati.beniculturali.it/lodview-arco/resource/HistoricOrArtisticProperty/0900281487-0.html)
-+ **Predicate**:a-dd:includesTechnicalCharacteristic [https://w3id.org/arco/ontology/denotative-description/TechnicalCharacteristic](https://w3id.org/arco/ontology/denotative-description/TechnicalCharacteristic) 
-+ **Object (chiaroscuro)**: [https://w3id.org/arco/resource/TechnicalCharacteristic/chiaroscuro](https://w3id.org/arco/resource/TechnicalCharacteristic/chiaroscuro)
++ **Predicate**: a-cd:hasTitle ([https://w3id.org/arco/ontology/context-description/Title​](https://w3id.org/arco/ontology/context-description/Title​)) 
++ **Object (Ultima Cena)**: [https://w3id.org/arco/resource/Title/0800437344-ultima-cena](https://w3id.org/arco/resource/Title/0800437344-ultima-cena)
 
 
 #### Triple 5
