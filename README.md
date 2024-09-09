@@ -144,7 +144,7 @@ FILTER(?label = "Apostoli")
 ```
 [Results](https://dati.cultura.gov.it/sparql?default-graph-uri=&query=PREFIX+rdf%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E++%0D%0APREFIX+rdfs%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E++%0D%0APREFIX+arco%3A+%3Chttps%3A%2F%2Fw3id.org%2Farco%2Fontology%2Farco%2F%3E++%0D%0APREFIX+a-cd%3A+%3Chttps%3A%2F%2Fw3id.org%2Farco%2Fontology%2Fcontext-description%2F%3E%0D%0A+SELECT+DISTINCT+++%0D%0A%3FhasSubject+%3Flabel+++%0D%0AWHERE+%7B+++%0D%0A%3FhasSubject+rdfs%3Alabel+%3Flabel+++%0D%0AFILTER%28%3Flabel+%3D+%22Apostoli%22%29++%0D%0A%7D%0D%0A%0D%0A&format=text%2Fhtml&timeout=0&signal_void=on).
 
-At this point, we created two new triples by linking our [subject](https://dati.beniculturali.it/lodview-arco/resource/HistoricOrArtisticProperty/0900281487-0.html) to its respective subjects using the *hasSubject* predicate: 
+At this point, we created two new triples by linking our [subject](https://dati.beniculturali.it/lodview-arco/resource/HistoricOrArtisticProperty/0900281487-0.html) to its respective objects using the *hasSubject* predicate: 
 
 #### Triple 1
 ***A-cd:hasSubject***
@@ -165,12 +165,23 @@ Concerning the material or technique of the artwork, in Arco it is classified as
 
 For greater completeness, we asked Gemini the same question again:
 
+SLIDE 1 GEMINI QUI 
+SLIDE 2 GEMINI QUI
 
 Asking the same question to Gemini, we noticed different types of responses between the two LLMs:​
 + With the first question, while ChatGPT answered “no”, Gemini answered “yes”​
 + Despite applying a generated knowledge prompting technique, Gemini did not provide us with much information compared to ChatGPT​
 
-    
+Once we know that «chiaroscuro» could be added as a technical feature, we asked ChatGPT through the **Few Shot Prompting** technique to provide us with the correct class in Arco:
+
+![immagine](https://github.com/user-attachments/assets/5346239a-29c9-4d58-9899-cde17c675d85)
+![immagine](https://github.com/user-attachments/assets/76386f7f-bec2-4775-a317-135e9f306ea3)
+
+Then, we asked it to transform this information into an RDF triple:
+
+![immagine](https://github.com/user-attachments/assets/e8b7ce0e-6789-4587-92e2-f1ca2987d56b)
+
+
 + For **title**:
   
 ```
