@@ -98,7 +98,7 @@ From this list we selected [this artwork](https://dati.beniculturali.it/lodview-
 ___
 
 ### Project phases 2 and 3: identifying missing data properties to create new RDF triples
-The objectives of the second phase of our project are as follows:
+The objectives of these phases are as follows:
 + **Identifying Missing Data Properties of the Artwork**;
 + **Employing Different Approaches with LLM to Retrieve Information**;
 + **Searching for the IRIs (Internationalized Resource Identifiers) of the Missing Properties**;
@@ -175,11 +175,21 @@ Asking the same question to Gemini, we noticed different types of responses betw
 Once we know that «chiaroscuro» could be added as a technical feature, we asked ChatGPT through the **Few Shot Prompting** technique to provide us with the correct class in Arco:
 
 ![immagine](https://github.com/user-attachments/assets/5346239a-29c9-4d58-9899-cde17c675d85)
-![immagine](https://github.com/user-attachments/assets/76386f7f-bec2-4775-a317-135e9f306ea3)
+![Immagine2](https://github.com/user-attachments/assets/7c4d7a36-707d-47cd-b743-83b22102cdcf)
 
 Then, we asked it to transform this information into an RDF triple:
 
-![immagine](https://github.com/user-attachments/assets/e8b7ce0e-6789-4587-92e2-f1ca2987d56b)
+![Immagine3](https://github.com/user-attachments/assets/e88c115d-d990-4361-847d-48983cd76a70)
+
+We used the same technique on Gemini to compare the two answers: 
+![Immagine4](https://github.com/user-attachments/assets/663e594b-d028-4169-941f-dfe1b0ebf498)
+
+We asked to transform this information into an RDF triple using Arco ontology, however, Gemini did not include the class for "chiaroscuro" in its initial description but added it only after it was requested a second time:
+![Immagine5](https://github.com/user-attachments/assets/158050ba-3988-4a0b-ad59-e83802137b7e)
+
+In both cases, ChatGPT and Gemini gave us the incorrect class for "chiaroscuro". The solution was checking Arco's denotative description and correcting the class with **a-dd:includesTechnicalCharacteristic**
+
+
 
 
 + For **title**:
