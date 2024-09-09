@@ -175,19 +175,21 @@ Asking the same question to Gemini, we noticed different types of responses betw
 Once we know that «chiaroscuro» could be added as a technical feature, we asked ChatGPT through the **Few Shot Prompting** technique to provide us with the correct class in Arco:
 
 ![immagine](https://github.com/user-attachments/assets/5346239a-29c9-4d58-9899-cde17c675d85)
-![Immagine2](https://github.com/user-attachments/assets/7c4d7a36-707d-47cd-b743-83b22102cdcf)
+![chatgpt2](https://github.com/user-attachments/assets/a856d995-6fa4-4c77-8d81-8219733e3151)
 
 Then, we asked it to transform this information into an RDF triple:
 
-![Immagine3](https://github.com/user-attachments/assets/e88c115d-d990-4361-847d-48983cd76a70)
+![Immagine 2024-09-09 170649](https://github.com/user-attachments/assets/e7e8da23-b0c2-4112-953d-20fffccc97d5)
+
 
 We used the same technique on Gemini to compare the two answers: 
 
-![Immagine4](https://github.com/user-attachments/assets/663e594b-d028-4169-941f-dfe1b0ebf498)
+![Immagine 2024-09-09 170756](https://github.com/user-attachments/assets/36147f11-d692-434a-93fa-7a162936cf8a)
 
 We asked to transform this information into an RDF triple using Arco ontology, however, Gemini did not include the class for "chiaroscuro" in its initial description but added it only after it was requested a second time:
 
-![Immagine5](https://github.com/user-attachments/assets/158050ba-3988-4a0b-ad59-e83802137b7e)
+![Immagine 2024-09-09 170938](https://github.com/user-attachments/assets/39c3652c-aa59-4035-8ab0-a7c6a22288b1)
+
 
 In both cases, ChatGPT and Gemini gave us the incorrect class for "chiaroscuro". The solution was checking Arco's denotative description and correcting the class with **a-dd:includesTechnicalCharacteristic**
 
