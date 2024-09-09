@@ -103,7 +103,7 @@ The objectives of the second phase of our project are as follows:
 + **Searching for the IRIs (Internationalized Resource Identifiers) of the Missing Properties**;
 + **Suggesting Improvements by Creating New RDF Triples**.
   
-We started the enrichment from the subject of the work, which on ArCo includes several entities under one label: *Ultima cena, Trinità, Santi*. By contrast, we want to associate each of the depicted entities separately in order to provide a more detailed and precise description. For this reason, we asked ChatGPT through the Zero-Shot CoT technique to identify key subjects within the artwork and enrich their associations with the cultural property:
+We started the enrichment from the subject of the work, which on ArCo includes several entities under one label: *Ultima cena, Trinità, Santi*. By contrast, we want to associate each of the depicted entities separately in order to provide a more detailed and precise description. For this reason, we asked ChatGPT through the **Zero-Shot CoT** technique to identify key subjects within the artwork and enrich their associations with the cultural property:
 
 ![ChatGPT](https://github.com/user-attachments/assets/00af153f-bc2a-402d-a00e-f91bfa8a53f6)
 ![ChatGPT1](https://github.com/user-attachments/assets/1dc6cdf9-efbc-4396-8d9d-1d3aa4b3dd73)
@@ -145,6 +145,19 @@ FILTER(?label = "Apostoli")
 ```
 [Results](https://dati.cultura.gov.it/sparql?default-graph-uri=&query=PREFIX+rdf%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E++%0D%0APREFIX+rdfs%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E++%0D%0APREFIX+arco%3A+%3Chttps%3A%2F%2Fw3id.org%2Farco%2Fontology%2Farco%2F%3E++%0D%0APREFIX+a-cd%3A+%3Chttps%3A%2F%2Fw3id.org%2Farco%2Fontology%2Fcontext-description%2F%3E%0D%0A+SELECT+DISTINCT+++%0D%0A%3FhasSubject+%3Flabel+++%0D%0AWHERE+%7B+++%0D%0A%3FhasSubject+rdfs%3Alabel+%3Flabel+++%0D%0AFILTER%28%3Flabel+%3D+%22Apostoli%22%29++%0D%0A%7D%0D%0A%0D%0A&format=text%2Fhtml&timeout=0&signal_void=on).
 
+Concerning the material or technique of the artwork, in Arco it is classified as «pittura a fresco», however **chiaroscuro** appears to be a feature of this technique. Therefore, we asked ChatGPT to either confirm or deny our hypothesis through the **Generated Knowledge Prompting technique**: 
+
+![immagine](https://github.com/user-attachments/assets/3572c308-6b64-44e3-9525-30849cdb9a56)
+![immagine](https://github.com/user-attachments/assets/6ad8e22e-fbe0-4f8f-aab9-08c9ca24cb18)
+
+For greater completeness, we asked Gemini the same question again:
+
+
+Asking the same question to Gemini, we noticed different types of responses between the two LLMs:​
++ With the first question, while ChatGPT answered “no”, Gemini answered “yes”​
++ Despite applying a generated knowledge prompting technique, Gemini did not provide us with much information compared to ChatGPT​
+
+    
 + For **title**:
   
 ```
