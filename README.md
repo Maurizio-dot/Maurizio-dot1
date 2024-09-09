@@ -127,8 +127,6 @@ FILTER(?label = "Gesù Cristo")
 
 ```
 
-[Results](https://dati.cultura.gov.it/sparql?default-graph-uri=&query=PREFIX+rdf%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E++%0D%0APREFIX+rdfs%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E++%0D%0APREFIX+arco%3A+%3Chttps%3A%2F%2Fw3id.org%2Farco%2Fontology%2Farco%2F%3E++%0D%0A%0D%0A+SELECT+DISTINCT+++%0D%0A%3FhasSubject+%3Flabel+++%0D%0AWHERE+%7B+++%0D%0A%3FhasSubject+rdfs%3Alabel+%3Flabel+++%0D%0AFILTER%28%3Flabel+%3D+%22Ges%C3%B9+Cristo%22%29++%0D%0A%7D%0D%0A%0D%0A&format=text%2Fhtml&timeout=0&signal_void=on).
-
 + For **Apostoli**:
   
 ```
@@ -145,6 +143,20 @@ FILTER(?label = "Apostoli")
 
 ```
 [Results](https://dati.cultura.gov.it/sparql?default-graph-uri=&query=PREFIX+rdf%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E++%0D%0APREFIX+rdfs%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E++%0D%0APREFIX+arco%3A+%3Chttps%3A%2F%2Fw3id.org%2Farco%2Fontology%2Farco%2F%3E++%0D%0APREFIX+a-cd%3A+%3Chttps%3A%2F%2Fw3id.org%2Farco%2Fontology%2Fcontext-description%2F%3E%0D%0A+SELECT+DISTINCT+++%0D%0A%3FhasSubject+%3Flabel+++%0D%0AWHERE+%7B+++%0D%0A%3FhasSubject+rdfs%3Alabel+%3Flabel+++%0D%0AFILTER%28%3Flabel+%3D+%22Apostoli%22%29++%0D%0A%7D%0D%0A%0D%0A&format=text%2Fhtml&timeout=0&signal_void=on).
+
+At this point, we created two new triples by linking our [subject](https://dati.beniculturali.it/lodview-arco/resource/HistoricOrArtisticProperty/0900281487-0.html) to its respective subjects using the *hasSubject* predicate: 
+
+#### Triple 1
+***A-cd:hasSubject***
++ [**Subject**](https://dati.beniculturali.it/lodview-arco/resource/HistoricOrArtisticProperty/0900281487-0.html)
++ **Predicate**: hasSubject [https://w3id.org/arco/ontology/context-description/hasSubject](https://w3id.org/arco/ontology/context-description/hasSubject)
++ **Object (Jesus Christ)**: [https://w3id.org/arco/resource/Subject/d767f5be4cd2be535a6d08e9019cca61](https://w3id.org/arco/resource/Subject/d767f5be4cd2be535a6d08e9019cca61​) 
+[Results](https://dati.cultura.gov.it/sparql?default-graph-uri=&query=PREFIX+rdf%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E++%0D%0APREFIX+rdfs%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E++%0D%0APREFIX+arco%3A+%3Chttps%3A%2F%2Fw3id.org%2Farco%2Fontology%2Farco%2F%3E++%0D%0A%0D%0A+SELECT+DISTINCT+++%0D%0A%3FhasSubject+%3Flabel+++%0D%0AWHERE+%7B+++%0D%0A%3FhasSubject+rdfs%3Alabel+%3Flabel+++%0D%0AFILTER%28%3Flabel+%3D+%22Ges%C3%B9+Cristo%22%29++%0D%0A%7D%0D%0A%0D%0A&format=text%2Fhtml&timeout=0&signal_void=on).
+
+#### Triple 2
++ [**Subject**](https://dati.beniculturali.it/lodview-arco/resource/HistoricOrArtisticProperty/0900281487-0.html)
++ **Predicate**: hasSubject [https://w3id.org/arco/ontology/context-description/hasSubject](https://w3id.org/arco/ontology/context-description/hasSubject)
++ **Object (Apostoli)**: [https://w3id.org/arco/resource/Subject/cde2df599f8d502cb7d74d2dfed1a9db​](https://w3id.org/arco/resource/Subject/cde2df599f8d502cb7d74d2dfed1a9db​)
 
 Concerning the material or technique of the artwork, in Arco it is classified as «pittura a fresco», however **chiaroscuro** appears to be a feature of this technique. Therefore, we asked ChatGPT to either confirm or deny our hypothesis through the **Generated Knowledge Prompting technique**: 
 
@@ -178,20 +190,8 @@ FILTER(?label = "Il Cenacolo")
 AGGIUNGERE PARTE SU CHIAROSCURO
 ___
 
-### 3. Creating new RDF triples
-The third and final phase of the project involves creating triples to link to the artwork. We created new sets of triples by linking our [subject](https://dati.beniculturali.it/lodview-arco/resource/HistoricOrArtisticProperty/0900281487-0.html) to its respective objects using adequate predicates: 
 
-#### Triple 1
-***A-cd:hasSubject***
-+ [**Subject**](https://dati.beniculturali.it/lodview-arco/resource/HistoricOrArtisticProperty/0900281487-0.html)
-+ **Predicate**: hasSubject [https://w3id.org/arco/ontology/context-description/hasSubject](https://w3id.org/arco/ontology/context-description/hasSubject)
-+ **Object (Jesus Christ)**: [https://w3id.org/arco/resource/Subject/d767f5be4cd2be535a6d08e9019cca61](https://w3id.org/arco/resource/Subject/d767f5be4cd2be535a6d08e9019cca61​) 
 
-#### Triple 2
-***A-cd:hasSubject***
-+ [**Subject**](https://dati.beniculturali.it/lodview-arco/resource/HistoricOrArtisticProperty/0900281487-0.html)
-+ **Predicate**: hasSubject [https://w3id.org/arco/ontology/context-description/hasSubject](https://w3id.org/arco/ontology/context-description/hasSubject)
-+ **Object (Apostoli)**: [https://w3id.org/arco/resource/Subject/cde2df599f8d502cb7d74d2dfed1a9db​](https://w3id.org/arco/resource/Subject/cde2df599f8d502cb7d74d2dfed1a9db​)
 
 #### Triple 3
 ***A-cd:hasTitle***
