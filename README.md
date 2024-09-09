@@ -182,9 +182,11 @@ Then, we asked it to transform this information into an RDF triple:
 ![Immagine3](https://github.com/user-attachments/assets/e88c115d-d990-4361-847d-48983cd76a70)
 
 We used the same technique on Gemini to compare the two answers: 
+
 ![Immagine4](https://github.com/user-attachments/assets/663e594b-d028-4169-941f-dfe1b0ebf498)
 
 We asked to transform this information into an RDF triple using Arco ontology, however, Gemini did not include the class for "chiaroscuro" in its initial description but added it only after it was requested a second time:
+
 ![Immagine5](https://github.com/user-attachments/assets/158050ba-3988-4a0b-ad59-e83802137b7e)
 
 In both cases, ChatGPT and Gemini gave us the incorrect class for "chiaroscuro". The solution was checking Arco's denotative description and correcting the class with **a-dd:includesTechnicalCharacteristic**
