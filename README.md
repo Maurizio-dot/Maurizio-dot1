@@ -103,9 +103,8 @@ The objectives of the second phase of our project are as follows:
 + **Searching for the IRIs (Internationalized Resource Identifiers) of the Missing Properties**;
 + **Suggesting Improvements by Creating New RDF Triples**.
   
-We started the enrichment from the subject of the work, which on ArCo includes several entities under one label: *Ultima cena, Trinità, Santi*. By contrast, we want to associate each of the depicted entities separately in order to provide a more detailed and precise description. For this reason, we asked ChatGPT through the Zero-Shot CoT technique to enhance the ‘a-cd:hasSubject’ relationship between the cultural asset ‘Last Supper’ by Andrea del Sarto and the subjects it represents. 
+We started the enrichment from the subject of the work, which on ArCo includes several entities under one label: *Ultima cena, Trinità, Santi*. By contrast, we want to associate each of the depicted entities separately in order to provide a more detailed and precise description. For this reason, we asked ChatGPT through the Zero-Shot CoT technique to identify key subjects within the artwork and enrich their associations with the cultural property:
 
-![Gemini](<img width="720" alt="GEMINI1" src="https://github.com/user-attachments/assets/74189669-aa22-40b4-af91-e38c928471a1">)
 ![ChatGPT](https://github.com/user-attachments/assets/00af153f-bc2a-402d-a00e-f91bfa8a53f6)
 ![ChatGPT1](https://github.com/user-attachments/assets/1dc6cdf9-efbc-4396-8d9d-1d3aa4b3dd73)
 
