@@ -12,6 +12,7 @@ In the initial phase of our project, our primary objectives were to identify a s
 We used the Zero-Shot technique asking ChatGPT to generate a list of lesser-known painters based in Florence. Our hypothesis was that ArCo might have fewer entries concerning works by "minor" artists compared to well-known figures.
 
 <img width="577" alt="Screenshot 2024-06-26 120120" src="https://github.com/Maurizio-dot/Maurizio-dot.github.io/assets/173699843/e37bcd50-6f29-46ed-bd95-bc384db8eec6">
+
 ![Cattura 1](https://github.com/Maurizio-dot/Maurizio-dot.github.io/assets/173814358/808ef577-f686-46c3-ba5d-4fa9ca5b4424)
 
 From this list we selected Andrea del Sarto. To verify the existence of properties authored by Andrea del Sarto within ArCo, we formulated the following ASK query:
