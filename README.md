@@ -222,7 +222,9 @@ Since our artwork in Arco is titled as *Ultima Cena, Trinità, Santi*, we wanted
 
 At this point, we wondered whether The Last Supper was the title attributed by the author himself or whether it had been attributed posthumously so that it could be associated with the right predicate: 
 
-SLIDE 20
+<img width="307" alt="Immagine7" src="https://github.com/user-attachments/assets/bf1ec9c5-ecee-4a01-9211-a1c956b351f9">
+
+
 SLIDE 20
 
 This means that both *Ultima Cena* and *Il Cenacolo* are valid as titles​. So, the next step consists in formulating a query that looks simultaneously for the IRIs of both titles:
