@@ -165,7 +165,8 @@ Concerning the material or technique of the artwork, in Arco it is classified as
 
 For greater completeness, we asked Gemini the same question again:
 
-![Gemini gkp](https://github.com/user-attachments/assets/219fa315-9e6a-439e-a190-da122ba6b26e)
+![gem 1](https://github.com/user-attachments/assets/5077e88e-b578-42fc-9f58-fb472d3fabf6)
+
 
 Asking the same question to Gemini, we noticed different types of responses between the two LLMs:​
 + With the first question, while ChatGPT answered “no”, Gemini answered “yes”​
