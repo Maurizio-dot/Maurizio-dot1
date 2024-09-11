@@ -151,8 +151,7 @@ At this point, we created two new triples by linking our [subject](https://dati.
 ***A-cd:hasSubject***
 + [**Subject**](https://dati.beniculturali.it/lodview-arco/resource/HistoricOrArtisticProperty/0900281487-0.html)
 + **Predicate**: hasSubject [https://w3id.org/arco/ontology/context-description/hasSubject](https://w3id.org/arco/ontology/context-description/hasSubject)
-+ **Object (Jesus Christ)**: [https://w3id.org/arco/resource/Subject/d767f5be4cd2be535a6d08e9019cca61](https://w3id.org/arco/resource/Subject/d767f5be4cd2be535a6d08e9019cca61​) 
-[Results](https://dati.cultura.gov.it/sparql?default-graph-uri=&query=PREFIX+rdf%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E++%0D%0APREFIX+rdfs%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E++%0D%0APREFIX+arco%3A+%3Chttps%3A%2F%2Fw3id.org%2Farco%2Fontology%2Farco%2F%3E++%0D%0A%0D%0A+SELECT+DISTINCT+++%0D%0A%3FhasSubject+%3Flabel+++%0D%0AWHERE+%7B+++%0D%0A%3FhasSubject+rdfs%3Alabel+%3Flabel+++%0D%0AFILTER%28%3Flabel+%3D+%22Ges%C3%B9+Cristo%22%29++%0D%0A%7D%0D%0A%0D%0A&format=text%2Fhtml&timeout=0&signal_void=on).
++ **Object (Jesus Christ)**: [https://dati.beniculturali.it/lodview-arco/resource/Subject/d767f5be4cd2be535a6d08e9019cca61.html](https://dati.beniculturali.it/lodview-arco/resource/Subject/d767f5be4cd2be535a6d08e9019cca61.html).
 
 #### Triple 2
 + [**Subject**](https://dati.beniculturali.it/lodview-arco/resource/HistoricOrArtisticProperty/0900281487-0.html)
