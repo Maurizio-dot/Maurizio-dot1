@@ -156,7 +156,7 @@ At this point, we created two new triples by linking our [subject](https://dati.
 #### Triple 2
 + [**Subject**](https://dati.beniculturali.it/lodview-arco/resource/HistoricOrArtisticProperty/0900281487-0.html)
 + **Predicate**: hasSubject [https://w3id.org/arco/ontology/context-description/hasSubject](https://w3id.org/arco/ontology/context-description/hasSubject)
-+ **Object (Apostoli)**: [https://dati.beniculturali.it/lodview-arco/resource/Subject/cde2df599f8d502cb7d74d2dfed1a9db.html](https://dati.beniculturali.it/lodview-arco/resource/Subject/cde2df599f8d502cb7d74d2dfed1a9db.html​)
++ **Object (Apostoli)**: [https://dati.beniculturali.it/lodview-arco/resource/Subject/cde2df599f8d502cb7d74d2dfed1a9db.html](https://dati.beniculturali.it/lodview-arco/resource/Subject/cde2df599f8d502cb7d74d2dfed1a9db.html)
 
 Concerning the material or technique of the artwork, in Arco it is classified as «pittura a fresco», however **chiaroscuro** appears to be a feature of this technique. Therefore, we asked ChatGPT to either confirm or deny our hypothesis through the **Generated Knowledge Prompting technique**: 
 
