@@ -254,12 +254,12 @@ WHERE {
 
 #### Triple 4
 + [**Subject**](https://dati.beniculturali.it/lodview-arco/resource/HistoricOrArtisticProperty/0900281487-0.html)
-+ **Predicate**: a-cd:hasTitle ([https://w3id.org/arco/ontology/context-description/Title​](https://w3id.org/arco/ontology/context-description/Title​)) 
++ **Predicate**: a-cd:hasTitle [https://w3id.org/arco/ontology/context-description/Title​](https://w3id.org/arco/ontology/context-description/Title) 
 + **Object (Ultima Cena)**: [https://w3id.org/arco/resource/Title/0800437344-ultima-cena](https://w3id.org/arco/resource/Title/0800437344-ultima-cena)
 
 
 #### Triple 5
 ***a-cd:hasTitle***
 + [**Subject**](https://dati.beniculturali.it/lodview-arco/resource/HistoricOrArtisticProperty/0900281487-0.html)
-+ **Predicate**: a-cd:hasTitle ([https://w3id.org/arco/ontology/context-description/Title​](https://w3id.org/arco/ontology/context-description/Title​)) 
++ **Predicate**: a-cd:hasTitle [https://w3id.org/arco/ontology/context-description/Title​](https://w3id.org/arco/ontology/context-description/Title) 
 + **Object (Il Cenacolo)**: [https://w3id.org/arco/resource/Title/0300158497-il-cenacolo](https://w3id.org/arco/resource/Title/0300158497-il-cenacolo)
